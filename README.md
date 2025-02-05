@@ -13,8 +13,7 @@
 ```
 📂 2phaseSIM
 ├── 2phaseSIM.py          # Main script for running the simulator
-├── check_inputs.py       # Module for validation and configuration loading
-├── input.json            # Input file with flow parameters
+├── input.py              # Input file with flow parameters
 ├── README.md             # Project documentation
 ```
 
