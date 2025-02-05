@@ -1,0 +1,25 @@
+import input as cfg
+
+def print_input():
+    with open("output.txt", "w", encoding="utf-8") as f:
+        f.write("=============================================\n")
+        f.write("        2phaseSIM - Simulação 1D\n")
+        f.write("=============================================\n\n")
+        f.write(">> Configuração da Simulação:\n\n")
+        f.write(f" 🏗  Diâmetro do tubo: {cfg.D} m\n")
+        f.write(f" 🌡  Temperatura: {cfg.T} K\n")
+        f.write(f" 🏭  Constante do gás: {cfg.R_g} J/kg.K\n")
+        f.write(f" ⚖  Densidade do gás: {cfg.rho_g} kg/m³\n")
+        f.write(f" ⚖  Densidade do líquido: {cfg.rho_l} kg/m³\n")
+        f.write(f" 💧  Viscosidade do gás: {cfg.mu_g} Pa.s\n")
+        f.write(f" 💧  Viscosidade do líquido: {cfg.mu_l} Pa.s\n")
+        f.write(f" 📐  Ângulo de inclinação: {cfg.theta} °\n")
+        f.write(f" 🌊  Tensão superficial: {cfg.sigma} N/m\n")
+        f.write(f" 📏  Comprimento do tubo: {cfg.L} m\n")
+        f.write(f" 🔬  Tamanho do volume de controle: {cfg.dL} m\n")
+        f.write(f" 💨  Velocidade superficial do gás: {cfg.j_g} m/s\n")
+        f.write(f" 🌊  Velocidade superficial do líquido: {cfg.j_l} m/s\n")
+        f.write("\n=============================================\n")
+        f.write("🚀  Iniciando simulação...\n\n")
+        f.write("🔄  Executando cálculos...\n")
+        f.write("✅  Simulação concluída. Gerando resultados...\n")
