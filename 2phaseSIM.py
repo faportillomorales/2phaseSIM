@@ -8,6 +8,10 @@ def main():
     
     # Salvar saída em arquivo
     prnt.print_input()
+    # with open("output.txt", "w", encoding="utf-8") as f:
+        # f.write("🚀  Iniciando simulação...\n\n")
+        # f.write("🔄  Executando cálculos...\n")
+        # f.write("✅  Simulação concluída. Gerando resultados...\n")
     
 if __name__ == "__main__":
     main()
