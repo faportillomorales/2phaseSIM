@@ -1,4 +1,10 @@
 import numpy as np
+import flowtechlib as ft
+from flowtechlib import exemples
+from flowtechlib import dicflowpattern as dfp
+
+
+global D, P_i, T, R_g, rho_g, rho_l, mu_g, mu_l, g, beta, sigma, L, dL, j_g, j_l
 
 # Parâmetros de entrada para a simulação 2phaseSIM
 
@@ -42,11 +48,14 @@ dL = 10
 j_g = 1.0  # Gás
 j_l = 0.5  # Líquido
 
+model = "Shoham2005"
+
 #############################################################################
-def inicialization():
+def init():
     """Inicializa campos adicionais e calcula parâmetros derivados."""
     global nVC, rho_g, P, dpdz, alfa, h, delta, F_strat, F_anular
     global A_t, alpha_g, alpha_l, A_g, A_l, m_dot_g, m_dot_l
+    global phe
     
     nVC = int(L / dL)               # Número de volumes de controle
     rho_g = abs(P_i) / (R_g * T)    # Atualiza a densidade do gás se necessário
@@ -71,12 +80,17 @@ def inicialization():
     A_l = alpha_l * A_t             # Área líquido
 
     # Cálculo da vazão mássica para cada fase
-    m_dot_g = rho_g * A_g * j_g  # Vazão mássica do gás
-    m_dot_l = rho_l * A_l * j_l  # Vazão mássica do líquido
-
+    m_dot_g = rho_g * A_g * j_g     # Vazão mássica do gás
+    m_dot_l = rho_l * A_l * j_l     # Vazão mássica do líquido
+    
+    ## Instancias para Função de Padrão
+    parms = exemples.exemple_0_Shoham   # Carregando um exemplo feito para a biblioteca
+    pat = ft.Patterns(parms)            # Criando instancia Geral
+    pat.info()                          # Informacoes do teste
+    phe = ft.Phenom(parms)              # Criando instancia phenomenological
 
 
 #############################################################################
 
-
-inicialization()
+# Esecuta inicialização das variáveis globais
+init()

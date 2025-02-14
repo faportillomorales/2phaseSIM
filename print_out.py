@@ -1,7 +1,7 @@
-import input as cfg
+import sim_input as cfg
 
 def print_input():
-    with open("output.txt", "w", encoding="utf-8") as f:
+    with open("output", "w", encoding="utf-8") as f:
         f.write("=============================================\n")
         f.write("        2phaseSIM - Simulação 1D\n")
         f.write("=============================================\n\n")
