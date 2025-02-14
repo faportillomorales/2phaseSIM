@@ -12,7 +12,7 @@ def run():
     P_i = sim_input.P_i  
 
     print(f"Número de células de volume: {nVC}")
-    P = np.zeros(nVC)  
+    P = np.zeros(nVC+1)  
 
     for i in range(nVC):
         P[0] = P_i  # Definir o valor inicial de P
