@@ -33,7 +33,7 @@ g = 9.81
 
 # Ângulo de inclinação do tubo (graus) com a horizontal
 angulo = 0
-beta = angulo*np.pi/180
+theta = angulo*np.pi/180
 
 # Tensão superficial entre as fases (N/m)
 sigma = 0.072
@@ -64,10 +64,6 @@ def init():
     P = np.zeros(nVC + 1)           # Campo da pressão
     dpdz = np.zeros(nVC + 1)        # Campo de gradiente de pressão
     alfa = np.zeros(nVC + 1)        # Campo de fração de vazio (Void_fraction)
-    h = [0.1 * D, 0.9 * D]          # Chutes iniciais para altura da interface (estratificado)
-    delta = [0.01*D, 0.40*D]        # Chutes iniciais para espessura do filme de líquido (anular)
-    F_strat = []                    # Vetor para salvar valores da equação de quantidade de movimento (estratificado)
-    F_anular = []                   # Vetor para salvar valores da equação de quantidade de movimento (anular)
 
     A_t = np.pi * (D/2)**2            # Área total da tubulação
 
