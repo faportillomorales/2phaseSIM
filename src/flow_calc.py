@@ -24,6 +24,7 @@ def cal_estratificado(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g):
     alpha - Fração de vazio (adimensional)
     """
 
+    R = D/2
     A = np.pi * (D**2) / 4  # Área total da tubulação
     Qg = jg * A  # Vazão volumétrica do gás (m³/s)
     Ql = jl * A  # Vazão volumétrica do líquido (m³/s)
@@ -41,35 +42,43 @@ def cal_estratificado(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g):
         return None, None, None
 
     # Cálculo da fração de vazio
-    A_g = (np.pi * D**2 / 4) - (D * h - h**2 / 2)
+    A_l = R**2 * (np.pi - np.arccos((h/R)-1) + ((h/R)-1) * np.sqrt(1-((h/R)-1)**2))
+    A_g = A - A_l
     alpha = A_g / A
 
+    # Velocidades médias das fases (in situ)
+    u_l = jl/(1-alpha)
+    u_g = jg/alpha
+
     # Perímetro molhado por cada fase
-    S_l = np.pi * D * (1 - alpha)
-    S_g = np.pi * D * alpha
+    S_l = 2*R*(np.pi - np.arccos((h/R)-1)) #np.pi * D * (1 - alpha)
+    S_g = 2*np.pi*R - S_l                      #np.pi * D * alpha
+    S_i = 2*R*np.sqrt(1-((h/R)-1)**2)
 
     # Diâmetro hidráulico para cada fase
-    D_hl = 4 * (A * (1 - alpha)) / S_l
-    D_hg = 4 * (A * alpha) / S_g
+    D_hl = 4 * (A_l / S_l)
+    D_hg = 4 * (A_g / (S_i + S_g))
 
     # Números de Reynolds
     Re_l = (rho_l * jl * D_hl) / mu_l
     Re_g = (rho_g * jg * D_hg) / mu_g
 
-    # Fator de atrito (Blasius para turbulento)
-    f_l = 0.046 / (Re_l**0.2) if Re_l > 2000 else 16 / Re_l
-    f_g = 0.046 / (Re_g**0.2) if Re_g > 2000 else 16 / Re_g
+    # Fator de atrito
+    f_l = 0.046 / (Re_l**(-0.2)) if Re_l > 2000 else 16 / Re_l
+    f_g = 0.046 / (Re_g**(-0.2)) if Re_g > 2000 else 16 / Re_g
+
+    Tau_W_l = f_l * rho_l * u_l**2 / 2
+    Tau_W_g = f_g * rho_g * u_g**2 / 2
+    f_i = f_g #For Smooth Stratified Flow
+    Tau_W_i = f_i * rho_g * (u_g - u_l)**2 / 2
 
     # Gradiente de pressão por atrito
-    dPdz_f = (f_l * rho_l * (jl/(1-alpha)))**2 / (2 * D_hl) + (f_g * rho_g * ((jg/alpha)**2) / (2 * D_hg))
-
-    # Gradiente de pressão por aceleração (simplificação)
-    dPdz_a = 0
+    dPdz_f = 
 
     # Gradiente de pressão por gravidade
     dPdz_g = (rho_l * (1 - alpha) + rho_g * alpha) * g * np.sin(theta)
 
     # Gradiente de pressão total
-    dPdz = -(dPdz_f + dPdz_a + dPdz_g)
+    dPdz = -(dPdz_f + dPdz_g)
     print('dPdz: ', dPdz)
-    return dPdz, alpha
+    return dPdz, alpha 
