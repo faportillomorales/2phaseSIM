@@ -3,6 +3,8 @@ import sim_input
 import src.pattern as pattern
 import src.flow_calc as flw
 import matplotlib.pyplot as plt
+import print_out as prnt
+
 
 
 def run():
@@ -10,10 +12,8 @@ def run():
     g = sim_input.g
     D = sim_input.D
     A_t = sim_input.A_t
-    A_g = sim_input.A_g
-    A_l = sim_input.A_l
     dL = sim_input.dL
-    R = sim_input.D / 2.0 
+    P_i = sim_input.P_i
     rho_g = sim_input.rho_g
     rho_l = sim_input.rho_l
     mu_g = sim_input.mu_g
@@ -22,12 +22,8 @@ def run():
     nVC = sim_input.nVC
     T = sim_input.T
     R_g = sim_input.R_g
-    P_i = sim_input.P_i  
-    m_dot_g = sim_input.m_dot_g
-    m_dot_l = sim_input.m_dot_l
-    j_g = m_dot_g/(A_t*rho_g)
-    j_l = m_dot_l/(A_t*rho_l)
-
+    j_g = sim_input.j_g 
+    j_l = sim_input.j_l 
     model = sim_input.model
 
     # Inicializando matrizes
@@ -38,15 +34,19 @@ def run():
 
     # Início do loop no espaço
     for i in range(nVC):
-        rho_g = abs(P[i]) / (T * R_g)  
+        rho_g = abs(P[i]) / (T * R_g) 
         padrao = pattern.classify_pattern(model,abs(j_l), abs(j_g))
         print(padrao)
 
         if padrao == 'Smooth Stratified':
-            dPdz[i],alpha[i] = flw.cal_estratificado(D, rho_g, rho_l, mu_g, mu_l, j_g, j_l, theta, g)
+            dPdz[i],alpha[i] = flw.cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, j_g, j_l, theta, g, maxit=1000)
 
         P[i+1]= P[i] + dL*dPdz[i];
-        print ("Pressão: ", P[i+1])    
+        print ("Pressão: ", P[i+1]) 
+        print ("dPdz: ", dPdz[i])   
+        print ("Fração de vazio: ", alpha[i])
+
+        prnt.print_results(padrao,dPdz[i],alpha[i],i)
 
 
     plt.figure()

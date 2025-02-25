@@ -1,10 +1,15 @@
+import os
+import directories as dir
 import sim_input as cfg
+import datetime
+import numpy as np
 
 # Função para abrir o arquivo de saída
-def open_output_file():
+def open_output_file(id_file):
     """Abre o arquivo globalmente para escrita."""
     global out_file
-    out_file = open("output", "a", encoding="utf-8")  # Alterei para "output.txt" para evitar erro de formato
+    
+    out_file = open(f"{dir.LOGS_PATH}\{id_file}.dat", "w", encoding="utf-8")  # Alterei para "output.txt" para evitar erro de formato
 
 # Função para fechar o arquivo de saída
 def close_output_file():
@@ -19,6 +24,26 @@ def msg(msg):
     global out_file
     
     out_file.write(msg)
+
+def write_header():
+    global out_file
+
+    sim_id = "out_" + datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Obtém a data e hora da execução
+    data_hora = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    # header formatado
+    cabecalho = (
+        f"# ID_simulation: {sim_id}\n"
+        f"# Date and Time: {data_hora}\n"
+        f"# -----------------------------\n"
+    )
+
+    # Escreve o cabeçalho no arquivo (modo de escrita 'w' sobrescreve o arquivo)
+    open_output_file(sim_id)
+    out_file.write(cabecalho)
+
 
 # Função para imprimir os parâmetros de entrada no arquivo de saída
 def print_input():
@@ -57,12 +82,15 @@ def print_input():
     
     out_file.flush()  # Garante que os dados sejam gravados imediatamente
 
-# Função para imprimir os resultados (Placeholder)
-def print_results():
+# Função para imprimir os resultados 
+def print_results(pattern,dPdz,alpha,n):
     """Função para imprimir os resultados da simulação."""
     global out_file
-    out_file.write("\n===== Resultados da Simulação =====\n")
-    out_file.write("⚠️  Função de cálculo ainda não implementada.\n")
-    out_file.write("=============================================\n")
+    
+    out_file.write("\n=============================================\n")
+    out_file.write(f"VC: {n} \n")
+    out_file.write(f"Pattern: {pattern} \n")
+    out_file.write(f"dPdz: {dPdz} \n")
+    out_file.write(f"alfa: {alpha}\n")
     out_file.flush()
 
