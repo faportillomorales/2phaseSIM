@@ -19,7 +19,7 @@ L = 24
 dL = 0.1
 
 # Velocidades superficiais das fases (m/s)
-j_g = 2.306 #0.551 #1.538 #2.306 # 0.551  # Gás
+j_g = 0.551 #1.538 #2.306 # 0.551  # Gás
 j_l = 0.040 #0.060  # Líquido
 
 #Pressão inicial (Pa)

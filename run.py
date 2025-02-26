@@ -25,6 +25,7 @@ def run():
     j_g = sim_input.j_g 
     j_l = sim_input.j_l 
     model = sim_input.model
+    m_g = j_g * sim_input.rho_g * A_t
 
     # Inicializando matrizes
     P = np.zeros(nVC+1)  
@@ -35,13 +36,15 @@ def run():
     # Início do loop no espaço
     for i in range(nVC):
         rho_g = abs(P[i]) / (T * R_g) 
+        j_g= m_g/(A_t*rho_g)
+
         padrao = pattern.classify_pattern(model,abs(j_l), abs(j_g))
-        print(padrao)
 
         if padrao == 'Smooth Stratified':
             dPdz[i],alpha[i] = flw.cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, j_g, j_l, theta, g, maxit=1000)
 
         P[i+1]= P[i] + dL*dPdz[i];
+        
         print ("Pressão: ", P[i+1]) 
         print ("dPdz: ", dPdz[i])   
         print ("Fração de vazio: ", alpha[i])
