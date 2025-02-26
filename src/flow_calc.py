@@ -39,18 +39,11 @@ def cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
         A_l = D**2 * (Lambda-np.sin(Lambda))/8  # Área líquido
         # A_l = (Lambda/2)*np.square(D/2) - (D/2)**2*np.sin((Lambda/2))*np.cos((Lambda/2))
         A_g = A - A_l                           # Área gás
-        # A_g = D**2 * (2*np.pi - Lambda + np.sin(Lambda))/8
-        # A_l = A - A_g
         alpha = A_g / A                         # Fração de vazio (fração de gás)
-        epsilon_l = A_l/A
-        epsilon_g = A_g/A
-        # Velocidades médias das fases (in situ)
-        # Ul = jl/(1-alpha)
-        # Ug = jg/alpha
 
-        Ul = jl/epsilon_l
-        Ug = jg/epsilon_g
-        print(rho_l, epsilon_l, A_l)
+        # Velocidades médias das fases (in situ)
+        Ul = jl/(1-alpha)
+        Ug = jg/alpha
 
         # Perímetro molhado por cada fase
         S_l = D * Lambda/2
@@ -65,21 +58,21 @@ def cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
         Re_g = (rho_g * Ug * Dg) / mu_g
         
         # Fator de atrito
-        f_l = 0.046 * (Re_l**(-0.2)) if Re_l > 2000 else 16 / Re_l
-        # f_l =16 / Re_l
-        f_g = 0.046 * (Re_g**(-0.2)) if Re_g > 2000 else 16 / Re_g
+        f_l = 0.046 * (Re_l**(-0.2)) if Re_l > 2000 else 16 / Re_l        ###### DIVERGE DO ESPERADO
+        # f_l = 16 / Re_l                                                     ###### CONSIDERANDO LAMINAR PARA O LÍQUIDO
+        f_g = 0.046 * (Re_g**(-0.2)) if Re_g > 2000 else 16 / Re_g          #####  MUDANDO RE>2000 PARA 2300 SE APROXIMA DO VALOR
 
         # Tensões cisalhantes (parietal e de interface)
         Tau_W_l = f_l * rho_l * (Ul**2) / 2              # Tensão parietal do líquido [Pa]
         Tau_W_g = f_g * rho_g * (Ug**2) / 2              # Tensão parietal do gás [Pa]
 
-        f_i = f_g   #For Smooth Stratified Flow
+        f_i = f_g   #For Smooth Stratified Flow   Taitel and Dukler
         
-        # f_i = 0.0142
-        # f_i = 1.3*Re_g**(-0.57)
-        # f_i = 0.96*Re_g**(-0.52)
-        # f_i = 0.0625*(np.log((15/Re_g)+(0.001/3.715*D)))**(-2)
-        # f_i = 5*f_g
+        # f_i = 0.0142                #Cohen and Hanratty
+        # f_i = 1.3*Re_g**(-0.57)   #Agrawal
+        # Re_sg = rho_g*jg*D/mu_g ; f_i = 0.96*Re_sg**(-0.52)   #Kowalski
+        # f_i = 0.0625*(np.log((15/Re_g)+(0.001/3.715*D)))**(-2)    #Crowley
+        # f_i = 5*f_g   #Hart
         Tau_i = f_i * rho_g * ((Ug - Ul)**2) / 2      # Tensão interfacial [Pa]
 
         # Equação de quantidade de movimento - residue has to be zero
@@ -108,6 +101,7 @@ def cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
     prnt.msg(f"h: {h[it]} \n")
     prnt.msg(f"D_g: {Dg} \n")
     prnt.msg(f"Re_g: {Re_g} \n")
+    prnt.msg(f"Re_l: {Re_l} \n")
     
     # Gradiente de pressão friccional
     dPdz_l_f = (-Tau_W_l * S_l + Tau_i * S_i )/A_l
