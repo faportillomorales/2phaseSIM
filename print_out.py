@@ -83,13 +83,10 @@ def print_input():
     out_file.flush()  # Garante que os dados sejam gravados imediatamente
 
 # Função para imprimir os resultados 
-def print_results(pattern,dPdz,alpha,n):
+def print_results(dPdz,alpha):
     """Função para imprimir os resultados da simulação."""
     global out_file
     
-    out_file.write("\n=============================================\n")
-    out_file.write(f"VC: {n} \n")
-    out_file.write(f"Pattern: {pattern} \n")
     out_file.write(f"dPdz: {dPdz} \n")
     out_file.write(f"alfa: {alpha}\n")
     out_file.flush()

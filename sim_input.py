@@ -1,11 +1,4 @@
 import numpy as np
-import flowtechlib as ft
-from flowtechlib import exemples
-from flowtechlib import dicflowpattern as dfp
-import input_teste
-
-
-global D, P_i, T, R_g, rho_g, rho_l, mu_g, mu_l, g, beta, sigma, L, dL, j_g, j_l
 
 # Parâmetros de entrada para a simulação 2phaseSIM
 
@@ -63,9 +56,9 @@ def init():
     nVC = int(L / dL)               # Número de volumes de controle
     
     # Inicialização de campos
-    P = np.zeros(nVC + 1)           # Campo da pressão
-    dpdz = np.zeros(nVC + 1)        # Campo de gradiente de pressão
-    alfa = np.zeros(nVC + 1)        # Campo de fração de vazio (Void_fraction)
+    P = np.zeros(nVC)           # Campo da pressão
+    dpdz = np.zeros(nVC)        # Campo de gradiente de pressão
+    alfa = np.zeros(nVC)        # Campo de fração de vazio (Void_fraction)
 
     A_t = np.pi * (D/2)**2            # Área total da tubulação
 

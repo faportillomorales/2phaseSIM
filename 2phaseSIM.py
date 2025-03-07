@@ -1,17 +1,13 @@
-import os
-import directories
 import argparse
-import sim_input
 import run
 import print_out as prnt
-import flowtechlib as ft
-from flowtechlib import exemples
-from flowtechlib import dicflowpattern as dfp
-import numpy as np
+import time
 
 def main():
     parser = argparse.ArgumentParser(description="2phaseSIM: Simulador de escoamentos multifásicos 1-D")
     args = parser.parse_args()
+
+    start_time = time.time()
 
     # Abro unidade de gravação de saída
     prnt.write_header()
@@ -21,12 +17,12 @@ def main():
     
     #Roda código
     prnt.msg("🚀  Iniciando simulação...\n\n")
-    run.run()
+    run.run_separated_phases()
 
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"\nTempo total da simulação: {elapsed_time:.2f} segundos")
 
-    
-        # f.write("🔄  Executando cálculos...\n")
-        # f.write("✅  Simulação concluída. Gerando resultados...\n")
 
 if __name__ == "__main__":
     main()

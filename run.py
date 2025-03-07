@@ -4,10 +4,12 @@ import src.pattern as pattern
 import src.flow_calc as flw
 import matplotlib.pyplot as plt
 import print_out as prnt
+from tqdm import tqdm  # Importa a barra de progresso
 
 
 
-def run():
+
+def run_separated_phases():
     # Importando variáveis do módulo de configuração
     g = sim_input.g
     D = sim_input.D
@@ -34,44 +36,46 @@ def run():
     P[0] = P_i  # Definir o valor inicial de P
 
     # Início do loop no espaço
-    for i in range(nVC):
+    for i in tqdm(range(nVC), desc="Simulation in process", unit="it"):
+        
+        prnt.msg("\n=============================================\n")
+        prnt.msg(f"VC: {i} \n")
+
         rho_g = abs(P[i]) / (T * R_g) 
         j_g= m_g/(A_t*rho_g)
 
         padrao = pattern.classify_pattern(model,abs(j_l), abs(j_g))
+        prnt.msg(f"Pattern: {padrao} \n")
+
 
         if padrao == 'Smooth Stratified':
             dPdz[i],alpha[i] = flw.cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, j_g, j_l, theta, g, maxit=1000)
 
         P[i+1]= P[i] + dL*dPdz[i];
-        
-        print ("Pressão: ", P[i+1]) 
-        print ("dPdz: ", dPdz[i])   
-        print ("Fração de vazio: ", alpha[i])
 
-        prnt.print_results(padrao,dPdz[i],alpha[i],i)
+        prnt.print_results(dPdz[i],alpha[i])
 
 
-    plt.figure()
-    plt.plot(alpha[:-1], marker='o', linestyle='-', color='b')
-    plt.title('Fração de vazio')
-    plt.xlabel('SEC')
-    plt.ylabel('Alfa')
-    plt.grid()
-    plt.show()
+    # plt.figure()
+    # plt.plot(alpha[:-1], marker='o', linestyle='-', color='b')
+    # plt.title('Fração de vazio')
+    # plt.xlabel('SEC')
+    # plt.ylabel('Alfa')
+    # plt.grid()
+    # plt.show()
 
-    plt.figure()
-    plt.plot(abs(dPdz[:-1]), marker='o', linestyle='-', color='b')
-    plt.title('Gráfico de dp/dz total')
-    plt.xlabel('SEC')
-    plt.ylabel('Valor Absoluto de dp/dz')
-    plt.grid()
-    plt.show()
+    # plt.figure()
+    # plt.plot(abs(dPdz[:-1]), marker='o', linestyle='-', color='b')
+    # plt.title('Gráfico de dp/dz total')
+    # plt.xlabel('SEC')
+    # plt.ylabel('Valor Absoluto de dp/dz')
+    # plt.grid()
+    # plt.show()
 
-    plt.figure()
-    plt.plot(P, marker='o', linestyle='-', color='b')
-    plt.title('Gráfico da Pressão')
-    plt.xlabel('SEC')
-    plt.ylabel('Pressão')
-    plt.grid()
-    plt.show()
+    # plt.figure()
+    # plt.plot(P, marker='o', linestyle='-', color='b')
+    # plt.title('Gráfico da Pressão')
+    # plt.xlabel('SEC')
+    # plt.ylabel('Pressão')
+    # plt.grid()
+    # plt.show()
