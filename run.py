@@ -56,6 +56,8 @@ def run_separated_phases():
         
         prnt.print_results(dPdz[i-1],alpha[i-1])
 
+    print(P)
+
     plt.figure()
     plt.plot(alpha[:-1], marker='o', linestyle='-', color='b')
     plt.title('Fração de vazio')
