@@ -28,6 +28,7 @@ def cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
     dPdx    - Gradiente de pressão (Pa/m)
     alpha   - Fração de vazio (adimensional)
     """
+    
     h = [0.1*D, 0.9*D]      # Chute inicial
     A = np.pi * (D**2) / 4  # Área total da tubulação
 
