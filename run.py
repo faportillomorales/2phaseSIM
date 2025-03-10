@@ -27,13 +27,13 @@ def run_separated_phases():
     j_g = sim_input.j_g 
     j_l = sim_input.j_l 
     model = sim_input.model
-    m_g = j_g * sim_input.rho_g * A_t
+    m_g = j_g * sim_input.rho_g * A_t # Vazão mássica (constante)
 
     # Inicializando matrizes
     P = np.zeros(nVC+1)  
     dPdz = np.zeros(nVC)
     alpha = np.zeros(nVC)
-    P[-1] = P_i  # Definir o valor inicial de P
+    P[-1] = P_i  # Definir o valor inicial de P na saída da tubulação
 
     # Início do loop no espaço
     for i in tqdm(range(nVC,0,-1), desc="Simulation in process", unit="it"):
@@ -56,26 +56,26 @@ def run_separated_phases():
         
         prnt.print_results(dPdz[i-1],alpha[i-1])
 
-    plt.figure()
-    plt.plot(alpha[:-1], marker='o', linestyle='-', color='b')
-    plt.title('Fração de vazio')
-    plt.xlabel('SEC')
-    plt.ylabel('Alfa')
-    plt.grid()
-    plt.show()
+    # plt.figure()
+    # plt.plot(alpha[:-1], marker='o', linestyle='-', color='b')
+    # plt.title('Fração de vazio')
+    # plt.xlabel('SEC')
+    # plt.ylabel('Alfa')
+    # plt.grid()
+    # plt.show()
 
-    plt.figure()
-    plt.plot(abs(dPdz[:-1]), marker='o', linestyle='-', color='b')
-    plt.title('Gráfico de dp/dz total')
-    plt.xlabel('SEC')
-    plt.ylabel('Valor Absoluto de dp/dz')
-    plt.grid()
-    plt.show()
+    # plt.figure()
+    # plt.plot(abs(dPdz[:-1]), marker='o', linestyle='-', color='b')
+    # plt.title('Gráfico de dp/dz total')
+    # plt.xlabel('SEC')
+    # plt.ylabel('Valor Absoluto de dp/dz')
+    # plt.grid()
+    # plt.show()
 
-    plt.figure()
-    plt.plot(P, marker='o', linestyle='-', color='b')
-    plt.title('Gráfico da Pressão')
-    plt.xlabel('SEC')
-    plt.ylabel('Pressão')
-    plt.grid()
-    plt.show()
+    # plt.figure()
+    # plt.plot(P, marker='o', linestyle='-', color='b')
+    # plt.title('Gráfico da Pressão')
+    # plt.xlabel('SEC')
+    # plt.ylabel('Pressão')
+    # plt.grid()
+    # plt.show()
