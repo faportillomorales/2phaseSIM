@@ -1,0 +1,20 @@
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----1
+                TEMPLATE DATA FILE FOR USE WITH PROGRAM OWHFP.F                2    
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----3
+                                                                               4
+Output File Name:                                                              5
+FILEO   |OILWAT.OUT|    Out file name, (chr)                                   6
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----7
+Flow Variables                                                                 8
+DENO    |     831.3|    Oil density, (kg/m^3)                                  9
+DENW    |    1070.1|    Water density,    (kg/m^3)                             10
+VISW    |   0.00076|    Water viscosity,  (Pa.s)                               11
+VISO    |   0.00734|    Oil viscosity,    (Pa.s)                               12
+D       |   0.08280|    Pipe diameter, (m)                                     13
+EPW     |   0.00001|    Pipe Wall roughness (m)                                14
+SUROW   |     0.036|    Oil water interfacial tansion, (N/m)                   15
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----16
+Options:                                                                       17
+ISHEL   | 0|     Sheltering coefficient index                                  18
+                    0 Sheltering effect is not considered.                     19
+                    1 Sheltering effect is considered.                         20
