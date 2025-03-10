@@ -9,10 +9,10 @@ parms = exemples.exemple_0_Shoham #input_teste.param            #  # Carregando 
 pat = ft.Patterns(parms)            # Criando instancia Geral
 phe = ft.Phenom(parms)              # Criando instancia phenomenological
 
-pat.alpha = sim_input.theta
-pat.d = sim_input.D
+# pat.alpha = sim_input.theta
+# pat.d = sim_input.D
 phe.alpha = sim_input.theta
-phe.d = sim_input.D
+# phe.d = sim_input.D
 # pat.info()                          # Informacoes do teste
 phe.info()
 # phe.PhenomPatternsMap()

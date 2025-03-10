@@ -70,12 +70,13 @@ def cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
         Tau_W_l = f_l * rho_l * (Ul**2) / 2              # Tensão parietal do líquido [Pa]
         Tau_W_g = f_g * rho_g * (Ug**2) / 2              # Tensão parietal do gás [Pa]
 
-        # f_i = f_g   #For Smooth Stratified Flow   Taitel and Dukler 
+        f_i = f_g   #For Smooth Stratified Flow   Taitel and Dukler 
         # f_i = 0.0142                #Cohen and Hanratty
         # f_i = 1.3*Re_g**(-0.57)   #Agrawal
         # Re_sg = rho_g*jg*D/mu_g ; f_i = 0.96*Re_sg**(-0.52)   #Kowalski
-        # f_i = 0.0625*(np.log((15/Re_g)+(0.001/3.715*D)))**(-2)    #Crowley
-        f_i = 5*f_g   #Hart
+        # f_i = 5*f_g   #Crowley
+        # f_i = 0.0625*(np.log((15/Re_g)+(0.001/3.715*D)))**(-2)    #Hart
+        
         Tau_i = f_i * rho_g * ((Ug - Ul)**2) / 2      # Tensão interfacial [Pa]
 
         # Equação de quantidade de movimento - residue has to be zero
