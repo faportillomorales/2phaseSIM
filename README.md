@@ -1,51 +1,49 @@
 # 2phaseSIM
 
-## Description
-**2phaseSIM** is a 1-D multiphase flow simulator developed in Python. The code allows modeling and analyzing the behavior of two-phase flows in pipelines, using numerical methods to solve governing flow equations.
+## Descrição
+O **2phaseSIM** é um código em Python desenvolvido para simulação de escoamentos multifásicos utilizando modelos unidimensionais (1-D). O código recebe parâmetros de entrada por meio de um arquivo de configuração e gera saídas contendo informações do escoamento, que podem ser visualizadas graficamente.
 
-## Features
-- Automatically reads simulation parameters from the `input.json` file
-- Validates input parameters
-- Executes the simulation with multiphase flow models
-- Generates results for analysis
+## Estrutura do Projeto
+A estrutura de diretórios do projeto é a seguinte:
 
-## Repository Structure
 ```
-📂 2phaseSIM
-├── 2phaseSIM.py          # Main script for running the simulator
-├── check_inputs.py       # Module for validation and configuration loading
-├── input.json            # Input file with flow parameters
-├── README.md             # Project documentation
+2phaseSIM/
+├── output/              # Resultados da simulação
+│   ├── logs/           # Arquivos de log gerados durante a execução
+│   ├── resume_figs/    # Figuras e gráficos gerados
+├── src/                # Código-fonte principal
+├── 2phaseSIM.py        # Arquivo principal para execução da simulação
+├── directories.py      # Configuração de diretórios do projeto
+├── input.py            # Arquivo de configuração de entrada da simulação
+├── input_teste.py      # Arquivo de entrada para testes
+├── print_out.py        # Módulo de manipulação de saídas
+├── run.py              # Script auxiliar para execução da simulação
+├── README.md           # Este arquivo
 ```
 
-## How to Use
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/2phaseSIM.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd 2phaseSIM
-   ```
-3. Edit the `input.json` file to define simulation parameters.
-4. Run the simulator:
-   ```sh
+## Como Usar
+
+1. Configure os parâmetros da simulação no arquivo `input.py`.
+2. Execute o script principal:
+
+   ```bash
    python 2phaseSIM.py
    ```
-5. The results will be displayed in the terminal and can be analyzed.
+3. Os resultados da simulação serão armazenados na pasta `output/`.
+4. Para visualizar os logs e as figuras, acesse as subpastas `logs/` e `resume_figs/`.
 
-## Requirements
-- Python 3.x
-- Standard libraries (no external dependencies required so far)
+## Dependências
+O código requer Python 3 e bibliotecas como:
 
-## Contribution
-Contributions are welcome! To contribute:
-1. Fork this repository
-2. Create a branch for your feature (`git checkout -b my-feature`)
-3. Commit your changes (`git commit -m 'Add my feature'`)
-4. Push to the repository (`git push origin my-feature`)
-5. Open a Pull Request
+- NumPy
+- Matplotlib
 
-## License
-This project is distributed under the MIT License.
+Para instalar as dependências, execute:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Contato
+Para dúvidas ou sugestões, entre em contato com o desenvolvedor do projeto.
 
