@@ -42,7 +42,12 @@ theta = angulo*np.pi/180
 # Tensão superficial entre as fases (N/m)
 sigma = 0.072
 
-model = "Shoham2005"
+# Rugosidade do tubo
+epsilon = 1e-6
+
+method = "Mixture"                  # Separated, Mixture
+pattern_model = "Shoham2005"        
+
 
 output_dir_name = "TESTE1"      # optional
 

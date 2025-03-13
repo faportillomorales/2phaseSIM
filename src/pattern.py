@@ -14,7 +14,7 @@ phe = ft.Phenom(parms)              # Criando instancia phenomenological
 phe.alpha = sim_input.theta
 # phe.d = sim_input.D
 # pat.info()                          # Informacoes do teste
-phe.info()
+# phe.info()
 # phe.PhenomPatternsMap()
 
 # fig1, ax1 = plt.subplots(1, 1, figsize=(5, 5))

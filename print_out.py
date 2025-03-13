@@ -50,25 +50,30 @@ def print_input():
     """Escreve a configuração inicial da simulação no arquivo de saída."""
     global out_file
     
-    out_file.write("=============================================\n")
+    out_file.write("============================================\n")
     out_file.write("        2phaseSIM - Simulação 1D\n")
-    out_file.write("=============================================\n\n")
+    out_file.write("============================================\n\n")
     out_file.write(">> Configuração da Simulação:\n\n")
     
+    out_file.write("================ Parâmetros =================\n")
+    out_file.write(f" Método: {cfg.method} \n")
+    out_file.write(f" Modelo de padrão: {cfg.pattern_model} \n")
+    out_file.write("============================================\n\n")
+
     # Fluido 1 (Líquido)
-    out_file.write("===== Fluido 1 (Líquido) =====\n")
+    out_file.write("=========== Fluido 1 (Líquido) =============\n")
     out_file.write(f" ⚖  Densidade: {cfg.rho_l} kg/m³\n")
     out_file.write(f" 💧  Viscosidade: {cfg.mu_l} Pa.s\n")
     out_file.write(f" 💨  Velocidade superficial: {cfg.j_l} m/s\n")
-    out_file.write("=============================================\n\n")
+    out_file.write("============================================\n\n")
     
     # Fluido 2 (Gás)
-    out_file.write("===== Fluido 2 (Gás) =====\n")
+    out_file.write("============= Fluido 2 (Gás) ===============\n")
     out_file.write(f" ⚖  Densidade: {cfg.rho_g} kg/m³\n")
     out_file.write(f" 💧  Viscosidade: {cfg.mu_g} Pa.s\n")
     out_file.write(f" 💨  Velocidade superficial: {cfg.j_g} m/s\n")
     out_file.write(f" 🏭  Constante do gás: {cfg.R_g} J/kg.K\n")
-    out_file.write("=============================================\n\n")
+    out_file.write("============================================\n\n")
     
     # Outras propriedades gerais
     out_file.write("===== Propriedades Gerais =====\n")

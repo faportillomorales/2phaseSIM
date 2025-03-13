@@ -3,7 +3,7 @@ import src.mat_functions as mat
 import print_out as prnt
 
 
-def cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
+def separated_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
     
     """
     Calcula a altura da interface h, o gradiente de pressão e a fração de vazio
@@ -123,4 +123,12 @@ def cal_smooth_stratified(D, rho_g, rho_l, mu_g, mu_l, jg, jl, theta, g, maxit):
 
     return dPdz_g, alpha 
 
-
+def mixture_separated_phases():
+    return
+    
+def entrainment_fraction(j_g, mu_g, rho_g, rho_l, sigma):
+    
+    # Modelo de Wallis (1969)
+    E_d = 1 - np.exp(-0.125 * (10**4 * j_g * mu_g * np.sqrt(rho_g / rho_l) / sigma - 1.5))
+    
+    return E_d
